@@ -1,0 +1,2204 @@
+/*
+  ============================================================================
+  PHYGITALS PROFESSIONAL CONSULTANCY
+  Single-file website delivered as a JavaScript file.
+
+  HOW TO USE:
+  1. Create an empty index.html file.
+  2. Add: <script src="phygitals-professional-consultancy.js"></script>
+  3. Open index.html in a browser.
+
+  This script injects the full HTML structure, CSS, and interactivity.
+  Stack: Pure JavaScript + injected HTML/CSS
+  ============================================================================
+*/
+
+(function () {
+  document.title = 'Phygitals Professional Consultancy | We transform your dreams into reality.';
+
+  // Inject essential head metadata.
+  const metaCharset = document.createElement('meta');
+  metaCharset.setAttribute('charset', 'UTF-8');
+
+  const metaViewport = document.createElement('meta');
+  metaViewport.name = 'viewport';
+  metaViewport.content = 'width=device-width, initial-scale=1.0';
+
+  const metaDescription = document.createElement('meta');
+  metaDescription.name = 'description';
+  metaDescription.content = 'Phygitals Professional Consultancy helps businesses transform physical operations into smart digital experiences through strategy, consulting, and implementation support.';
+
+  const metaTheme = document.createElement('meta');
+  metaTheme.name = 'theme-color';
+  metaTheme.content = '#0b0b1a';
+
+  document.head.append(metaCharset, metaViewport, metaDescription, metaTheme);
+
+  // Inject all CSS in one style block so the JS file remains self-contained.
+  const style = document.createElement('style');
+  style.textContent = `
+    :root {
+      --bg: #0b0b1a;
+      --bg-soft: #111126;
+      --surface: rgba(26, 26, 46, 0.85);
+      --surface-strong: #1a1a2e;
+      --surface-light: rgba(255, 255, 255, 0.04);
+      --text: #f4f7ff;
+      --text-muted: #a9b4d0;
+      --heading: #ffffff;
+      --primary: #00d9ff;
+      --primary-soft: rgba(0, 217, 255, 0.12);
+      --accent: #ff00aa;
+      --accent-soft: rgba(255, 0, 170, 0.14);
+      --border: rgba(255, 255, 255, 0.08);
+      --success: #58f5a1;
+      --warning: #ffd166;
+      --danger: #ff6b8a;
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.28);
+      --glow-primary: 0 0 18px rgba(0, 217, 255, 0.35);
+      --glow-accent: 0 0 18px rgba(255, 0, 170, 0.3);
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --container: 1200px;
+      --nav-height: 78px;
+      --grid-gap: clamp(1rem, 2vw, 1.5rem);
+      --section-space: clamp(4.5rem, 7vw, 7rem);
+      --transition: 240ms ease;
+      --font-stack: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.light-mode {
+      --bg: #eef5ff;
+      --bg-soft: #dde9f9;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --surface-light: rgba(11, 11, 26, 0.04);
+      --text: #0f1830;
+      --text-muted: #576483;
+      --heading: #081226;
+      --border: rgba(8, 18, 38, 0.08);
+      --primary-soft: rgba(0, 217, 255, 0.1);
+      --accent-soft: rgba(255, 0, 170, 0.08);
+      --shadow-lg: 0 20px 55px rgba(13, 26, 52, 0.12);
+      --shadow-md: 0 12px 24px rgba(13, 26, 52, 0.09);
+      --glow-primary: 0 0 12px rgba(0, 217, 255, 0.18);
+      --glow-accent: 0 0 12px rgba(255, 0, 170, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 217, 255, 0.08), transparent 26%),
+        radial-gradient(circle at 85% 12%, rgba(255, 0, 170, 0.08), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(0, 217, 255, 0.05), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, #090915 100%);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ::selection {
+      background: rgba(0, 217, 255, 0.3);
+      color: #fff;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--container));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: var(--section-space) 0;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--heading);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.6vw, 1.18rem);
+      max-width: 720px;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--grid-gap);
+    }
+
+    .glass-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 217, 255, 0.22);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.95rem 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition), color var(--transition);
+      min-height: 48px;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #59f1ff);
+      color: #061018;
+      box-shadow: var(--glow-primary);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.45);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      border-color: var(--accent);
+      box-shadow: var(--glow-accent);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: var(--glow-primary);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: 1200;
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.55);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1100;
+      background: rgba(11, 11, 26, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    body.light-mode header {
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom-color: rgba(8, 18, 38, 0.08);
+    }
+
+    .nav {
+      min-height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #071118;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: var(--glow-primary), var(--glow-accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.45) 50%, transparent 80%);
+      transform: translateX(-120%);
+      animation: shine 7s linear infinite;
+    }
+
+    @keyframes shine {
+      to { transform: translateX(120%); }
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      color: var(--heading);
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-copy span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      font-weight: 600;
+      position: relative;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.45rem;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--heading);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .theme-toggle,
+    .menu-toggle,
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    }
+
+    .theme-toggle:hover,
+    .menu-toggle:hover,
+    .icon-btn:hover,
+    .theme-toggle:focus-visible,
+    .menu-toggle:focus-visible,
+    .icon-btn:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(0, 217, 255, 0.28);
+      box-shadow: var(--glow-primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 999px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-panel {
+      display: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - var(--nav-height));
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: clamp(1.4rem, 4vw, 3rem);
+      align-items: center;
+      position: relative;
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      margin-bottom: 1.2rem;
+      text-wrap: balance;
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--primary) 0%, #78f7ff 45%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 28px rgba(0, 217, 255, 0.18);
+    }
+
+    .hero-copy {
+      margin-bottom: 1.6rem;
+      max-width: 680px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      max-width: 760px;
+    }
+
+    .stat-card {
+      padding: 1.15rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -50% auto;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.12), transparent 68%);
+    }
+
+    .stat-value {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--heading);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at center, rgba(0, 217, 255, 0.06), transparent 48%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .floating-dashboard {
+      position: relative;
+      z-index: 2;
+      width: min(92%, 520px);
+      padding: 1.2rem;
+      border-radius: 28px;
+      overflow: hidden;
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .dashboard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--heading);
+    }
+
+    .signal {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      color: var(--success);
+    }
+
+    .signal::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .mini-panel {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .chart-bars {
+      height: 170px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 0.6rem;
+      padding-top: 1rem;
+    }
+
+    .chart-bars span {
+      flex: 1;
+      border-radius: 999px 999px 6px 6px;
+      background: linear-gradient(180deg, var(--primary), rgba(0, 217, 255, 0.18));
+      box-shadow: var(--glow-primary);
+      animation: bars 4s ease-in-out infinite;
+      min-height: 40px;
+    }
+
+    .chart-bars span:nth-child(2n) {
+      background: linear-gradient(180deg, var(--accent), rgba(255, 0, 170, 0.18));
+      box-shadow: var(--glow-accent);
+    }
+
+    .chart-bars span:nth-child(1) { height: 36%; animation-delay: 0.1s; }
+    .chart-bars span:nth-child(2) { height: 62%; animation-delay: 0.25s; }
+    .chart-bars span:nth-child(3) { height: 48%; animation-delay: 0.4s; }
+    .chart-bars span:nth-child(4) { height: 74%; animation-delay: 0.55s; }
+    .chart-bars span:nth-child(5) { height: 56%; animation-delay: 0.7s; }
+    .chart-bars span:nth-child(6) { height: 84%; animation-delay: 0.85s; }
+
+    @keyframes bars {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.88); }
+    }
+
+    .metric {
+      margin-bottom: 0.9rem;
+    }
+
+    .metric:last-child {
+      margin-bottom: 0;
+    }
+
+    .metric-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .metric-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: var(--glow-primary);
+    }
+
+    .logo-strip {
+      padding-top: 1.2rem;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .logo-item {
+      padding: 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+    }
+
+    .check-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: var(--glow-primary);
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-image-shell {
+      padding: 1rem;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-image-shell img {
+      width: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      border-radius: 22px;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .about-overlay-card {
+      position: absolute;
+      right: -1rem;
+      bottom: 1.5rem;
+      width: min(320px, 86%);
+      padding: 1.2rem;
+    }
+
+    .cards-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .service-card,
+    .industry-card,
+    .case-card,
+    .blog-card,
+    .why-card,
+    .faq-item,
+    .contact-panel {
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before,
+    .industry-card::before,
+    .case-card::before,
+    .blog-card::before,
+    .why-card::before {
+      content: "";
+      position: absolute;
+      inset: -40% auto auto -15%;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.12), transparent 68%);
+      pointer-events: none;
+    }
+
+    .service-icon,
+    .industry-icon,
+    .why-icon,
+    .contact-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: inline-grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.12), rgba(255, 0, 170, 0.12));
+      color: var(--heading);
+      box-shadow: var(--glow-primary);
+    }
+
+    .card-link {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card-link:hover {
+      color: var(--heading);
+    }
+
+    .why-layout {
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: start;
+    }
+
+    .why-intro-card {
+      padding: 1.7rem;
+      position: sticky;
+      top: calc(var(--nav-height) + 1.25rem);
+    }
+
+    .why-points {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .case-card img,
+    .blog-card img {
+      border-radius: 18px;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .case-meta,
+    .blog-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .results-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .results-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .results-list strong {
+      color: var(--heading);
+    }
+
+    .blog-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .faq-layout {
+      grid-template-columns: 0.92fr 1.08fr;
+      align-items: start;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .faq-item button {
+      width: 100%;
+      background: none;
+      border: 0;
+      color: inherit;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-item button span:last-child {
+      font-size: 1.7rem;
+      color: var(--primary);
+      line-height: 1;
+      transition: transform var(--transition);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease, margin-top 300ms ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 220px;
+      margin-top: 0.85rem;
+    }
+
+    .faq-item.active button span:last-child {
+      transform: rotate(45deg);
+    }
+
+    .contact-layout {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+
+    .contact-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-line {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .contact-form {
+      padding: 1.6rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 0.95rem;
+      color: var(--heading);
+      font-weight: 600;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .field textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: rgba(0, 217, 255, 0.45);
+      box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
+    }
+
+    .field small {
+      min-height: 1.1rem;
+      color: var(--danger);
+      font-size: 0.82rem;
+    }
+
+    .form-note {
+      margin-top: 0.8rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+      color: #092415;
+      background: linear-gradient(135deg, #78f7c0, #a7ffd6);
+      font-weight: 700;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 0;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: inline-grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .social-link:hover,
+    .social-link:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(255, 0, 170, 0.35);
+      box-shadow: var(--glow-accent);
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.12), rgba(255, 0, 170, 0.12));
+      color: var(--heading);
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition), box-shadow var(--transition);
+      z-index: 1050;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      box-shadow: var(--glow-primary);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 650ms ease, transform 650ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-wrap,
+      .about-grid,
+      .why-layout,
+      .faq-layout,
+      .contact-layout,
+      .dashboard-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cards-3,
+      .blog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .why-intro-card {
+        position: static;
+      }
+
+      .hero-visual {
+        min-height: 480px;
+      }
+
+      .about-overlay-card {
+        position: static;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .logos {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 840px) {
+      .nav-links,
+      .nav-actions .btn {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .mobile-panel {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 300ms ease;
+        border-top: 1px solid transparent;
+      }
+
+      .mobile-panel.open {
+        max-height: 480px;
+        border-top-color: var(--border);
+      }
+
+      .mobile-panel-inner {
+        padding: 1rem 0 1.2rem;
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .mobile-panel a,
+      .mobile-panel button,
+      .mobile-panel .btn {
+        width: 100%;
+      }
+
+      .mobile-link {
+        display: block;
+        padding: 0.9rem 1rem;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .hero-stats,
+      .form-grid,
+      .cards-3,
+      .cards-4,
+      .blog-grid,
+      .logos {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(calc(100% - 1.2rem), var(--container));
+      }
+
+      .brand-copy span {
+        display: none;
+      }
+
+      .hero-wrap {
+        padding-top: 2rem;
+      }
+
+      .floating-dashboard {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .service-card,
+      .industry-card,
+      .case-card,
+      .blog-card,
+      .why-card,
+      .faq-item,
+      .contact-panel,
+      .contact-form,
+      .why-intro-card {
+        padding: 1.15rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Inject the full page markup.
+  document.body.innerHTML = `
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#home" aria-label="Phygitals Professional Consultancy home">
+          <div class="brand-mark">P</div>
+          <div class="brand-copy">
+            <strong>Phygitals Professional Consultancy</strong>
+            <span>We transform your dreams into reality.</span>
+          </div>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#industries">Industries</a></li>
+            <li><a href="#why-us">Why Choose Us</a></li>
+            <li><a href="#case-studies">Projects</a></li>
+            <li><a href="#insights">Insights</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark or light mode" title="Toggle theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3V5.5M12 18.5V21M4.93 4.93L6.7 6.7M17.3 17.3L19.07 19.07M3 12H5.5M18.5 12H21M4.93 19.07L6.7 17.3M17.3 6.7L19.07 4.93M16 12A4 4 0 1 1 8 12A4 4 0 0 1 16 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <a class="btn btn-primary" href="#contact">Book a Consultation</a>
+          <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle mobile menu" aria-controls="mobilePanel" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-panel" id="mobilePanel">
+        <div class="container mobile-panel-inner">
+          <a class="mobile-link" href="#home">Home</a>
+          <a class="mobile-link" href="#about">About Us</a>
+          <a class="mobile-link" href="#services">Services</a>
+          <a class="mobile-link" href="#industries">Industries</a>
+          <a class="mobile-link" href="#why-us">Why Choose Us</a>
+          <a class="mobile-link" href="#case-studies">Projects</a>
+          <a class="mobile-link" href="#insights">Insights</a>
+          <a class="mobile-link" href="#contact">Contact</a>
+          <a class="btn btn-primary" href="#contact">Book a Consultation</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="home">
+        <div class="container hero-wrap">
+          <div class="hero-content reveal">
+            <div class="eyebrow">Phygital strategy consultancy</div>
+            <h1 class="hero-title">We connect the <span class="accent">physical and digital</span> sides of your business.</h1>
+            <p class="lead hero-copy">
+              Phygitals Professional Consultancy helps organizations modernize operations, elevate customer experiences, and deploy practical digital transformation programs that deliver measurable business value.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Start Your Transformation</a>
+              <a href="#services" class="btn btn-secondary">Explore Services</a>
+            </div>
+            <div class="hero-stats">
+              <article class="glass-card stat-card">
+                <span class="stat-value">35%</span>
+                <p>Average operational efficiency gains achieved through workflow redesign and automation.</p>
+              </article>
+              <article class="glass-card stat-card">
+                <span class="stat-value">20+</span>
+                <p>Cross-functional transformation initiatives guided across strategy, systems, and execution.</p>
+              </article>
+              <article class="glass-card stat-card">
+                <span class="stat-value">90 Days</span>
+                <p>Typical timeframe to move from assessment to pilot launch with implementation-ready roadmaps.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" aria-hidden="true">
+            <canvas id="heroCanvas"></canvas>
+            <div class="floating-dashboard glass-card">
+              <div class="dashboard-top">
+                <div>
+                  <div class="dashboard-title">Transformation Control Center</div>
+                  <p>Monitoring operations, customer journeys, and digital adoption in one view.</p>
+                </div>
+                <div class="signal">Live Sync</div>
+              </div>
+              <div class="dashboard-grid">
+                <div class="mini-panel">
+                  <div class="tag"><span class="tag-dot"></span> Performance Snapshot</div>
+                  <div class="chart-bars" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="mini-panel">
+                  <div class="metric">
+                    <div class="metric-label"><span>Process Digitization</span><strong>82%</strong></div>
+                    <div class="metric-track"><div class="metric-fill" style="width:82%"></div></div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-label"><span>Data Visibility</span><strong>74%</strong></div>
+                    <div class="metric-track"><div class="metric-fill" style="width:74%"></div></div>
+                  </div>
+                  <div class="metric">
+                    <div class="metric-label"><span>Team Adoption</span><strong>91%</strong></div>
+                    <div class="metric-track"><div class="metric-fill" style="width:91%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container logo-strip reveal">
+          <div class="logos">
+            <div class="glass-card logo-item">Retail Ops</div>
+            <div class="glass-card logo-item">Industrial Tech</div>
+            <div class="glass-card logo-item">Smart Services</div>
+            <div class="glass-card logo-item">Healthcare Flow</div>
+            <div class="glass-card logo-item">Logistics IQ</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">About us</div>
+            <h2>Building modern business experiences where operations meet innovation.</h2>
+            <p class="lead">
+              “Phygitals” reflects our core belief: businesses perform best when their physical capabilities and digital systems work as one. We help leadership teams turn fragmented processes into streamlined, intelligent, customer-centered operations.
+            </p>
+          </div>
+
+          <div class="grid about-grid">
+            <div class="about-copy reveal">
+              <p>
+                From frontline workflows and service operations to internal systems and executive reporting, our consultancy designs transformation programs that are practical, scalable, and aligned to real business priorities.
+              </p>
+              <p>
+                We combine strategic clarity with execution support, helping organizations move from diagnosis to implementation without losing momentum. Every engagement is built to reduce friction, improve visibility, and strengthen resilience.
+              </p>
+              <ul class="check-list">
+                <li>
+                  <div class="check-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div>
+                    <h3>Strategy grounded in operations</h3>
+                    <p>We identify where digital transformation creates the most operational and commercial impact—not just where it looks impressive on paper.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="check-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div>
+                    <h3>Implementation support that reduces risk</h3>
+                    <p>Our team helps translate plans into pilot programs, governance structures, and adoption frameworks that teams can realistically sustain.</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="check-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div>
+                    <h3>Human-centered transformation</h3>
+                    <p>We design with leadership teams, employees, and customers in mind so change feels useful, trusted, and measurable across the business.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="about-visual reveal">
+              <div class="glass-card about-image-shell">
+                <img src="https://picsum.photos/900/1100?random=11" alt="Consulting team reviewing digital transformation dashboards in a modern office" />
+              </div>
+              <div class="glass-card about-overlay-card">
+                <div class="tag"><span class="tag-dot"></span> Consultancy focus</div>
+                <h3>Turning business complexity into coordinated action.</h3>
+                <p>We help organizations simplify decisions, connect systems, and unlock smarter customer and operational outcomes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Services</div>
+            <h2>Consulting services designed to move transformation from idea to execution.</h2>
+            <p class="lead">
+              Our services combine strategic advisory, process redesign, and implementation planning so your organization can modernize with speed and confidence.
+            </p>
+          </div>
+
+          <div class="grid cards-3">
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 13H10V20H4V13ZM14 4H20V20H14V4ZM9 9H15V20H9V9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Digital Transformation Strategy</h3>
+              <p>We assess your current operating model, prioritize opportunities, and define an actionable roadmap that aligns investment, technology, and business outcomes.</p>
+              <a href="#contact" class="card-link">Discuss strategy <span>→</span></a>
+            </article>
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L20 7V17L12 21L4 17V7L12 3ZM12 3V21M4 7L12 11L20 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Process Optimization & Automation</h3>
+              <p>We map friction points, redesign workflows, and identify automation opportunities that improve cycle times, data accuracy, and operational consistency.</p>
+              <a href="#contact" class="card-link">Optimize workflows <span>→</span></a>
+            </article>
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 8H17M7 12H13M7 16H11M5 4H19C20.1 4 21 4.9 21 6V18C21 19.1 20.1 20 19 20H5C3.9 20 3 19.1 3 18V6C3 4.9 3.9 4 5 4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Implementation Planning & PMO Support</h3>
+              <p>We provide governance models, pilot design, vendor coordination, and change management support to keep complex initiatives on track and business-ready.</p>
+              <a href="#contact" class="card-link">Plan execution <span>→</span></a>
+            </article>
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5H19V19H5V5ZM9 9H15V15H9V9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Customer Experience Design</h3>
+              <p>We help businesses modernize customer touchpoints by connecting physical interactions with seamless digital journeys, feedback loops, and service visibility.</p>
+              <a href="#contact" class="card-link">Enhance journeys <span>→</span></a>
+            </article>
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12C4 12 7 6 12 6C17 6 20 12 20 12C20 12 17 18 12 18C7 18 4 12 4 12ZM12 14.5C13.38 14.5 14.5 13.38 14.5 12C14.5 10.62 13.38 9.5 12 9.5C10.62 9.5 9.5 10.62 9.5 12C9.5 13.38 10.62 14.5 12 14.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Data Visibility & Decision Dashboards</h3>
+              <p>We define key metrics, reporting structures, and management dashboards that help teams monitor performance and act quickly with confidence.</p>
+              <a href="#contact" class="card-link">Improve visibility <span>→</span></a>
+            </article>
+            <article class="glass-card service-card reveal">
+              <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 20V10M12 20V4M18 20V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Capability Building & Adoption</h3>
+              <p>We support leadership communication, team enablement, and adoption planning so transformation efforts generate sustained value beyond launch.</p>
+              <a href="#contact" class="card-link">Build adoption <span>→</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="industries">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Industries</div>
+            <h2>Industry insight for organizations modernizing complex real-world operations.</h2>
+            <p class="lead">We tailor transformation frameworks to the realities of each sector—balancing operational demands, customer expectations, and implementation practicality.</p>
+          </div>
+
+          <div class="grid cards-4">
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏪</div><h3>Retail & Omnichannel</h3><p>Improve store operations, fulfillment visibility, and digitally connected customer experiences across physical and online environments.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏭</div><h3>Manufacturing</h3><p>Modernize production workflows, maintenance coordination, and performance reporting across plant, field, and management teams.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🚚</div><h3>Logistics & Supply Chain</h3><p>Increase process transparency, reduce handoff friction, and enhance operational decision-making from dispatch to delivery.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏥</div><h3>Healthcare Services</h3><p>Support service coordination, patient flow improvements, and digital enablement for teams balancing compliance and care quality.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏢</div><h3>Professional Services</h3><p>Strengthen delivery operations, reporting structures, and digital workflows that improve responsiveness and profitability.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏨</div><h3>Hospitality & Experience</h3><p>Bridge in-person service delivery with digital guest journeys, operational intelligence, and smarter staff coordination.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">🏗️</div><h3>Infrastructure & Field Operations</h3><p>Connect site activities, scheduling, approvals, and reporting into more reliable, digitized operating environments.</p></article>
+            <article class="glass-card industry-card reveal"><div class="industry-icon">💼</div><h3>Growth-Stage Enterprises</h3><p>Establish scalable systems and governance so rapidly growing businesses can modernize without losing agility.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why-us">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Why choose us</div>
+            <h2>Trusted guidance for leaders navigating operational and digital change.</h2>
+          </div>
+
+          <div class="grid why-layout">
+            <aside class="glass-card why-intro-card reveal">
+              <div class="tag"><span class="tag-dot"></span> Strategic advantage</div>
+              <h3 style="margin-top: 1rem;">A consultancy built for transformation that actually gets implemented.</h3>
+              <p>We do more than deliver presentation decks. We work with your business to shape priorities, structure decisions, and support execution in a way teams can absorb and leadership can measure.</p>
+              <div style="margin-top:1.25rem; display:grid; gap:0.75rem;">
+                <div class="tag">Executive alignment</div>
+                <div class="tag">Operational realism</div>
+                <div class="tag">Technology translation</div>
+                <div class="tag">Implementation momentum</div>
+              </div>
+            </aside>
+
+            <div class="why-points">
+              <article class="glass-card why-card reveal"><div class="why-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3L21 7.5V16.5L12 21L3 16.5V7.5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>We bridge strategy, systems, and frontline reality.</h3><p>Our approach aligns executive vision with the operational detail required to make transformation stick in real-world environments.</p></article>
+              <article class="glass-card why-card reveal"><div class="why-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 12L10 15L17 8M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>We focus on measurable business outcomes.</h3><p>Every recommendation is tied to operational performance, customer impact, adoption readiness, or financial improvement.</p></article>
+              <article class="glass-card why-card reveal"><div class="why-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>We bring clarity to complex change.</h3><p>We simplify fragmented initiatives into coherent phases, priorities, and governance models leadership can confidently manage.</p></article>
+              <article class="glass-card why-card reveal"><div class="why-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12H20M12 4V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>We design change that people can adopt.</h3><p>Transformation succeeds when teams understand it, trust it, and can use it. We account for that from the start.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="case-studies">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Case studies / projects</div>
+            <h2>Representative transformation programs that turn operational friction into performance gains.</h2>
+            <p class="lead">Below are sample project narratives illustrating how phygital consulting creates measurable outcomes across strategy, workflow design, and implementation support.</p>
+          </div>
+
+          <div class="grid cards-3">
+            <article class="glass-card case-card reveal">
+              <img src="https://picsum.photos/800/500?random=31" alt="Retail operations workspace with digital dashboard screens" />
+              <div class="case-meta"><span class="tag">Retail</span><span class="tag">Process redesign</span></div>
+              <h3>Omnichannel retail operations modernization</h3>
+              <p>A growing retail group needed better coordination between stores, warehouse teams, and customer service channels. We redesigned workflows and introduced a unified reporting model.</p>
+              <ul class="results-list">
+                <li><span>Order exception handling</span><strong>-42%</strong></li>
+                <li><span>Store-to-warehouse visibility</span><strong>Real-time</strong></li>
+                <li><span>Leadership reporting cycle</span><strong>-60%</strong></li>
+              </ul>
+            </article>
+
+            <article class="glass-card case-card reveal">
+              <img src="https://picsum.photos/800/500?random=32" alt="Manufacturing environment with smart monitoring visuals" />
+              <div class="case-meta"><span class="tag">Manufacturing</span><span class="tag">Data visibility</span></div>
+              <h3>Production visibility and maintenance coordination</h3>
+              <p>An operations leader required clearer insight into downtime drivers, maintenance scheduling, and plant performance. We built a phased transformation roadmap with KPI dashboards and governance support.</p>
+              <ul class="results-list">
+                <li><span>Critical issue response time</span><strong>-33%</strong></li>
+                <li><span>Maintenance planning accuracy</span><strong>+27%</strong></li>
+                <li><span>Executive dashboard adoption</span><strong>89%</strong></li>
+              </ul>
+            </article>
+
+            <article class="glass-card case-card reveal">
+              <img src="https://picsum.photos/800/500?random=33" alt="Logistics planning interface with shipment tracking visuals" />
+              <div class="case-meta"><span class="tag">Logistics</span><span class="tag">Implementation PMO</span></div>
+              <h3>Field and dispatch workflow transformation</h3>
+              <p>A logistics operator needed to digitize dispatch handoffs and reduce delays caused by fragmented communication. We structured the transformation program and supported rollout readiness.</p>
+              <ul class="results-list">
+                <li><span>Manual follow-up calls</span><strong>-48%</strong></li>
+                <li><span>Dispatch handoff delays</span><strong>-36%</strong></li>
+                <li><span>Pilot rollout completion</span><strong>On schedule</strong></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="insights">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Blog / insights</div>
+            <h2>Perspective for leaders shaping the future of operational and digital transformation.</h2>
+            <p class="lead">Explore practical insight on strategy, organizational readiness, customer experience, and the realities of transforming physical business environments.</p>
+          </div>
+
+          <div class="grid blog-grid">
+            <article class="glass-card blog-card reveal"><img src="https://picsum.photos/800/520?random=41" alt="Modern business dashboard displaying digital metrics" /><div class="blog-meta"><span class="tag">Strategy</span><span class="tag">5 min read</span></div><h3>Why digital transformation fails without operational redesign</h3><p>Technology investments rarely deliver full value when outdated workflows remain untouched. Sustainable transformation requires business process clarity first.</p><a href="#contact" class="card-link">Read summary <span>→</span></a></article>
+            <article class="glass-card blog-card reveal"><img src="https://picsum.photos/800/520?random=42" alt="Customer experience and service journey planning board" /><div class="blog-meta"><span class="tag">Customer experience</span><span class="tag">4 min read</span></div><h3>Connecting in-person service with digital convenience</h3><p>The most effective customer journeys blend human interaction with digital visibility, reducing friction while building confidence and loyalty.</p><a href="#contact" class="card-link">Read summary <span>→</span></a></article>
+            <article class="glass-card blog-card reveal"><img src="https://picsum.photos/800/520?random=43" alt="Executive team planning transformation roadmap on a screen" /><div class="blog-meta"><span class="tag">Leadership</span><span class="tag">6 min read</span></div><h3>Three signs your business is ready for a phygital operating model</h3><p>If teams are juggling fragmented systems, manual workarounds, and rising expectations, the case for integrated transformation is already emerging.</p><a href="#contact" class="card-link">Read summary <span>→</span></a></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="faq-heading">
+        <div class="container">
+          <div class="grid faq-layout">
+            <div class="section-header reveal" style="margin-bottom:0;">
+              <div class="eyebrow">FAQ</div>
+              <h2 id="faq-heading">Common questions about our consulting approach.</h2>
+              <p class="lead">Clear answers for teams evaluating transformation support, project readiness, and implementation planning.</p>
+            </div>
+
+            <div class="faq-list">
+              <article class="glass-card faq-item reveal active">
+                <button type="button" aria-expanded="true"><span><strong>What does “phygital” mean in practical business terms?</strong></span><span>+</span></button>
+                <div class="faq-answer"><p>It means designing operations and customer experiences where physical workflows and digital systems are intentionally connected. The goal is better visibility, faster execution, and a more seamless experience for employees and customers.</p></div>
+              </article>
+              <article class="glass-card faq-item reveal">
+                <button type="button" aria-expanded="false"><span><strong>Do you only advise, or do you also support implementation?</strong></span><span>+</span></button>
+                <div class="faq-answer"><p>We do both. Depending on your needs, we can support strategy design, pilot planning, governance setup, vendor coordination, reporting structures, and change enablement.</p></div>
+              </article>
+              <article class="glass-card faq-item reveal">
+                <button type="button" aria-expanded="false"><span><strong>What size of business do you typically work with?</strong></span><span>+</span></button>
+                <div class="faq-answer"><p>Our work is well suited to growing businesses, mid-sized enterprises, and established organizations that need more integrated operations, better data visibility, and a structured transformation roadmap.</p></div>
+              </article>
+              <article class="glass-card faq-item reveal">
+                <button type="button" aria-expanded="false"><span><strong>How quickly can a transformation program begin?</strong></span><span>+</span></button>
+                <div class="faq-answer"><p>Many engagements start with a focused discovery phase that can begin within a few weeks. From there, we help define priorities, decision points, and the first practical implementation steps.</p></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Contact us</div>
+            <h2>Let’s shape your next transformation milestone.</h2>
+            <p class="lead">Whether you are defining a new strategy, solving operational bottlenecks, or preparing for implementation, we can help you move forward with confidence.</p>
+          </div>
+
+          <div class="grid contact-layout">
+            <div class="contact-stack">
+              <article class="glass-card contact-panel reveal">
+                <div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6H20V18H4V6ZM4 7L12 13L20 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3>Get in touch</h3>
+                <div class="contact-info">
+                  <div class="contact-line"><p><strong style="color:var(--heading);">Email:</strong><br />hello@phygitalsconsultancy.com</p></div>
+                  <div class="contact-line"><p><strong style="color:var(--heading);">Phone:</strong><br />+1 (555) 240-8841</p></div>
+                  <div class="contact-line"><p><strong style="color:var(--heading);">Office:</strong><br />Innovation District, Business Tower, Level 12</p></div>
+                </div>
+              </article>
+
+              <article class="glass-card contact-panel reveal">
+                <div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21C16.4183 21 20 17.4183 20 13C20 8.58172 16.4183 5 12 5C7.58172 5 4 8.58172 4 13C4 17.4183 7.58172 21 12 21ZM12 21V13M12 5V3M8 3H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <h3>How we engage</h3>
+                <p>We typically begin with a short discovery conversation to understand your goals, current challenges, and immediate opportunities for operational improvement.</p>
+              </article>
+            </div>
+
+            <form class="glass-card contact-form reveal" id="contactForm" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Enter your full name" />
+                  <small></small>
+                </div>
+                <div class="field">
+                  <label for="email">Business Email</label>
+                  <input type="email" id="email" name="email" placeholder="you@company.com" />
+                  <small></small>
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company" placeholder="Your company name" />
+                  <small></small>
+                </div>
+                <div class="field">
+                  <label for="service">Primary Interest</label>
+                  <select id="service" name="service">
+                    <option value="">Select a service</option>
+                    <option>Digital Transformation Strategy</option>
+                    <option>Process Optimization & Automation</option>
+                    <option>Implementation Planning & PMO Support</option>
+                    <option>Customer Experience Design</option>
+                    <option>Data Visibility & Dashboards</option>
+                    <option>Capability Building & Adoption</option>
+                  </select>
+                  <small></small>
+                </div>
+                <div class="field full">
+                  <label for="message">Project Goals</label>
+                  <textarea id="message" name="message" placeholder="Tell us about your current challenges, goals, or transformation priorities."></textarea>
+                  <small></small>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Send Inquiry</button>
+              <p class="form-note">We will review your inquiry and respond with the most relevant next step for your business context.</p>
+              <div class="success-message" id="successMessage">Thank you. Your inquiry has been validated and is ready to be connected to a live backend or email handler.</div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom:1rem;">
+              <div class="brand-mark">P</div>
+              <div class="brand-copy">
+                <strong>Phygitals Professional Consultancy</strong>
+                <span>We transform your dreams into reality.</span>
+              </div>
+            </div>
+            <p>We help businesses transform physical operations into smart digital experiences through strategy, consulting, and implementation support.</p>
+            <div class="socials" aria-label="Social media links">
+              <a class="social-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V20H6.94V8.5ZM5.25 3C4.17 3 3.5 3.72 3.5 4.66C3.5 5.58 4.15 6.31 5.21 6.31H5.23C6.33 6.31 7 5.58 7 4.66C6.98 3.72 6.33 3 5.25 3ZM20.5 12.46C20.5 8.94 18.62 7.31 16.11 7.31C14.08 7.31 13.17 8.42 12.66 9.2V8.5H9.28C9.32 9.43 9.28 20 9.28 20H12.66V13.58C12.66 13.24 12.68 12.9 12.78 12.66C13.05 11.99 13.67 11.31 14.68 11.31C16 11.31 16.53 12.32 16.53 13.8V20H19.91V13.41C19.91 13.06 19.94 12.71 19.91 12.46H20.5Z"/></svg></a>
+              <a class="social-link" href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22L15.23 9.74L23.2 22H16.96L12.07 14.57L5.57 22H2.46L9.7 13.72L2.06 2H8.46L12.88 8.79L18.9 2ZM17.81 20.06H19.53L7.52 3.84H5.67L17.81 20.06Z"/></svg></a>
+              <a class="social-link" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21V13.5H16L16.5 10.5H13.5V8.94C13.5 8.08 13.84 7.5 15.13 7.5H16.63V4.77C15.9 4.67 15.16 4.62 14.42 4.62C12.22 4.62 10.5 5.95 10.5 8.4V10.5H8V13.5H10.5V21H13.5Z"/></svg></a>
+              <a class="social-link" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2H17C19.76 2 22 4.24 22 7V17C22 19.76 19.76 22 17 22H7C4.24 22 2 19.76 2 17V7C2 4.24 4.24 2 7 2ZM16.5 4.5C15.67 4.5 15 5.17 15 6C15 6.83 15.67 7.5 16.5 7.5C17.33 7.5 18 6.83 18 6C18 5.17 17.33 4.5 16.5 4.5ZM12 7C9.24 7 7 9.24 7 12C7 14.76 9.24 17 12 17C14.76 17 17 14.76 17 12C17 9.24 14.76 7 12 7ZM12 9C13.66 9 15 10.34 15 12C15 13.66 13.66 15 12 15C10.34 15 9 13.66 9 12C9 10.34 10.34 9 12 9Z"/></svg></a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links" style="margin-top:1rem;">
+              <a href="#about">About Us</a>
+              <a href="#services">Services</a>
+              <a href="#industries">Industries</a>
+              <a href="#case-studies">Projects</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Contact</h3>
+            <div class="footer-links" style="margin-top:1rem;">
+              <a href="mailto:hello@phygitalsconsultancy.com">hello@phygitalsconsultancy.com</a>
+              <a href="tel:+15552408841">+1 (555) 240-8841</a>
+              <span>Mon - Fri | 9:00 AM - 6:00 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© <span id="currentYear"></span> Phygitals Professional Consultancy. All rights reserved.</span>
+          <span>Designed for modern business transformation.</span>
+        </div>
+      </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  `;
+
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const menuToggle = document.getElementById('menuToggle');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-link');
+  const desktopNavLinks = document.querySelectorAll('.nav-links a');
+  const backToTop = document.getElementById('backToTop');
+  const scrollProgress = document.getElementById('scrollProgress');
+  const faqItems = document.querySelectorAll('.faq-item');
+  const revealItems = document.querySelectorAll('.reveal');
+  const sections = document.querySelectorAll('main section[id]');
+  const contactForm = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+  const currentYear = document.getElementById('currentYear');
+
+  currentYear.textContent = new Date().getFullYear();
+
+  const savedTheme = localStorage.getItem('phygitals-theme');
+  if (savedTheme === 'light') {
+    body.classList.add('light-mode');
+  }
+
+  function updateThemeButtonLabel() {
+    const isLight = body.classList.contains('light-mode');
+    themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    themeToggle.setAttribute('title', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  }
+
+  updateThemeButtonLabel();
+
+  themeToggle.addEventListener('click', function () {
+    body.classList.toggle('light-mode');
+    const isLight = body.classList.contains('light-mode');
+    localStorage.setItem('phygitals-theme', isLight ? 'light' : 'dark');
+    updateThemeButtonLabel();
+  });
+
+  function closeMobileMenu() {
+    mobilePanel.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  menuToggle.addEventListener('click', function () {
+    const isOpen = mobilePanel.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function () {
+      closeMobileMenu();
+    });
+  });
+
+  function updateActiveNav() {
+    let currentSectionId = 'home';
+
+    sections.forEach(function (section) {
+      const sectionTop = section.offsetTop - 140;
+      if (window.scrollY >= sectionTop) {
+        currentSectionId = section.getAttribute('id');
+      }
+    });
+
+    desktopNavLinks.forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + currentSectionId);
+    });
+  }
+
+  function updateScrollUI() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = progress + '%';
+
+    if (scrollTop > 500) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+
+    updateActiveNav();
+  }
+
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateScrollUI, { passive: true });
+  updateScrollUI();
+
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealItems.forEach(function (item) {
+    revealObserver.observe(item);
+  });
+
+  faqItems.forEach(function (item) {
+    const trigger = item.querySelector('button');
+    trigger.addEventListener('click', function () {
+      const isOpen = item.classList.contains('active');
+
+      faqItems.forEach(function (faq) {
+        faq.classList.remove('active');
+        faq.querySelector('button').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('active');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  function setError(input, message) {
+    const field = input.closest('.field');
+    const helper = field.querySelector('small');
+    helper.textContent = message;
+    input.style.borderColor = 'rgba(255, 107, 138, 0.8)';
+  }
+
+  function clearError(input) {
+    const field = input.closest('.field');
+    const helper = field.querySelector('small');
+    helper.textContent = '';
+    input.style.borderColor = '';
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
+  if (contactForm) {
+    const fields = {
+      name: document.getElementById('name'),
+      email: document.getElementById('email'),
+      company: document.getElementById('company'),
+      service: document.getElementById('service'),
+      message: document.getElementById('message')
+    };
+
+    Object.values(fields).forEach(function (field) {
+      field.addEventListener('input', function () {
+        clearError(field);
+        successMessage.classList.remove('show');
+      });
+    });
+
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      let isValid = true;
+
+      if (fields.name.value.trim().length < 2) {
+        setError(fields.name, 'Please enter your full name.');
+        isValid = false;
+      } else {
+        clearError(fields.name);
+      }
+
+      if (!isValidEmail(fields.email.value)) {
+        setError(fields.email, 'Please enter a valid business email address.');
+        isValid = false;
+      } else {
+        clearError(fields.email);
+      }
+
+      if (fields.company.value.trim().length < 2) {
+        setError(fields.company, 'Please enter your company name.');
+        isValid = false;
+      } else {
+        clearError(fields.company);
+      }
+
+      if (!fields.service.value.trim()) {
+        setError(fields.service, 'Please select the service you are interested in.');
+        isValid = false;
+      } else {
+        clearError(fields.service);
+      }
+
+      if (fields.message.value.trim().length < 20) {
+        setError(fields.message, 'Please provide at least 20 characters about your project goals.');
+        isValid = false;
+      } else {
+        clearError(fields.message);
+      }
+
+      if (isValid) {
+        successMessage.classList.add('show');
+        contactForm.reset();
+      } else {
+        successMessage.classList.remove('show');
+      }
+    });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (event) {
+      const targetId = this.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      event.preventDefault();
+      const top = target.getBoundingClientRect().top + window.pageYOffset - 76;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  const canvas = document.getElementById('heroCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let particles = [];
+    let animationFrameId = null;
+    const mouse = { x: null, y: null, radius: 130 };
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createParticles();
+    }
+
+    function createParticles() {
+      const count = Math.max(34, Math.min(72, Math.floor(width / 14)));
+      particles = Array.from({ length: count }, function () {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.55,
+          vy: (Math.random() - 0.5) * 0.55,
+          size: Math.random() * 2.4 + 1,
+          hueShift: Math.random() > 0.6 ? 'accent' : 'primary'
+        };
+      });
+    }
+
+    function drawBackgroundGrid() {
+      const gridSize = 36;
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = body.classList.contains('light-mode')
+        ? 'rgba(8, 18, 38, 0.045)'
+        : 'rgba(255,255,255,0.045)';
+
+      for (let x = 0; x <= width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+
+      for (let y = 0; y <= height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < mouse.radius && distance > 0) {
+            p.x += (dx / distance) * 0.4;
+            p.y += (dy / distance) * 0.4;
+          }
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
+        if (p.hueShift === 'accent') {
+          gradient.addColorStop(0, 'rgba(255, 0, 170, 0.95)');
+          gradient.addColorStop(1, 'rgba(255, 0, 170, 0)');
+        } else {
+          gradient.addColorStop(0, 'rgba(0, 217, 255, 0.95)');
+          gradient.addColorStop(1, 'rgba(0, 217, 255, 0)');
+        }
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+    }
+
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const maxDistance = 115;
+
+          if (distance < maxDistance) {
+            const opacity = 1 - distance / maxDistance;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = a.hueShift === 'accent' || b.hueShift === 'accent'
+              ? 'rgba(255, 0, 170, ' + opacity * 0.22 + ')'
+              : 'rgba(0, 217, 255, ' + opacity * 0.22 + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      drawBackgroundGrid();
+      drawConnections();
+      drawParticles();
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    function stopAnimation() {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    }
+
+    canvas.addEventListener('mousemove', function (event) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
+    });
+
+    canvas.addEventListener('mouseleave', function () {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    if (!reducedMotion) {
+      animate();
+    } else {
+      ctx.clearRect(0, 0, width, height);
+      drawBackgroundGrid();
+      drawConnections();
+      drawParticles();
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopAnimation();
+      } else if (!reducedMotion) {
+        animate();
+      }
+    });
+  }
+})();
